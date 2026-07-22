@@ -26,12 +26,12 @@
                 </li>
                 <li>
                     <a class="dropdown-item dropdown-item-custom" href="#" data-filter="ctt" id="filter-ctt-item">
-                        <i class="bi bi-card-text me-2 text-primary"></i> CTT
+                        <i class="bi bi-card-text me-2 text-primary"></i> Descripcion
                     </a>
                 </li>
                 <li>
                     <a class="dropdown-item dropdown-item-custom" href="#" data-filter="numero_escuela" id="filter-numero-item">
-                        <i class="bi bi-hash me-2 text-success"></i> Número de Escuela
+                        <i class="bi bi-hash me-2 text-success"></i> Nombre de la Carpeta
                     </a>
                 </li>
                 <li>
@@ -46,7 +46,7 @@
         </div>
         <!--boton para crear carpetas -->
         <div class="d-flex align-items-center gap-0">
-            <a href="{{ route('escuelas.creaRR') }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva escuela">
+            <a href="{{ route('escuelas.creaRR') }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva carpeta">
                 <span id="aggregate-btn-text"></span>
                 <i class="bi bi-folder-plus fs-3 text-primary"></i>
             </a>
