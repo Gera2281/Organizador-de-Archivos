@@ -30,7 +30,7 @@ class ArchivosController extends Controller
 
         // Obtener la carpeta de la escuela en public/archivos
         $archivosPath = public_path('archivos');
-        $escuelaCarpeta = (string)$escuela->numero_escuela;
+        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
         $rutaCarpeta = $archivosPath . '/' . $escuelaCarpeta;
 
         if (File::isDirectory($rutaCarpeta)) {
@@ -46,7 +46,7 @@ class ArchivosController extends Controller
     public function show(\App\Models\Escuela $escuela, $carpeta)
     {
         $archivosPath = public_path('archivos');
-        $numeroCarpeta = (string)$escuela->numero_escuela;
+        $numeroCarpeta = (string)$escuela->nombre_carpeta_principal;
         $rutaCarpeta = $archivosPath . '/' . $numeroCarpeta . '/' . $carpeta;
 
         if (!File::isDirectory($rutaCarpeta)) {
@@ -102,7 +102,7 @@ class ArchivosController extends Controller
         ]);
 
         $archivo = new Archivo();
-        $escuelaCarpeta = (string)$escuela->numero_escuela;
+        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
 
         if ($request->hasFile('documento')) { //Si subieron un archivo
             $file = $request->file('documento');

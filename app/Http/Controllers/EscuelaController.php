@@ -24,14 +24,14 @@ class EscuelaController extends Controller
         $dbQuery = Escuela::query();
 
         if ($query) {
-            if ($filter === 'ctt') {
-                $dbQuery->where('ctt', 'LIKE', '%' . $query . '%');
-            } elseif ($filter === 'numero_escuela') {
-                $dbQuery->where('numero_escuela', 'LIKE', '%' . $query . '%');
+            if ($filter === 'descripcion') {
+                $dbQuery->where('descripcion', 'LIKE', '%' . $query . '%');
+            } elseif ($filter === 'nombre_carpeta_principal') {
+                $dbQuery->where('nombre_carpeta_principal', 'LIKE', '%' . $query . '%');
             } else {
                 $dbQuery->where(function($q) use ($query) {
-                    $q->where('ctt', 'LIKE', '%' . $query . '%')
-                      ->orWhere('numero_escuela', 'LIKE', '%' . $query . '%');
+                    $q->where('descripcion', 'LIKE', '%' . $query . '%')
+                      ->orWhere('nombre_carpeta_principal', 'LIKE', '%' . $query . '%');
                 });
             }
         }
@@ -49,18 +49,18 @@ class EscuelaController extends Controller
     public function ValidarCarpetasEscuelas(Request $request)
     {
         $request->validate([     //Validar que los campos no esten vacios y max caracteres
-            'numero_escuela' => 'required|max:15|unique:escuelas,numero_escuela',
-            'ctt' => 'required|max:15',
+            'nombre_carpeta_principal' => 'required|max:30|unique:carpetas,nombre_carpeta_principal',
+            'descripcion' => 'required|max:30',
         ]);
 
         $escuela = new Escuela();
-        $escuela->numero_escuela = $request->numero_escuela; //Darle valor al objeto
-        $escuela->ctt = $request->ctt;
+        $escuela->nombre_carpeta_principal = $request->nombre_carpeta_principal;
+        $escuela->descripcion = $request->descripcion;
         //$escuela->user_id = Auth::id();  //Guardar el usuario que creo la carpeta
         $escuela->save();
 
         // Crear la carpeta en public/archivos
-        $folderName = $escuela->numero_escuela;
+        $folderName = $escuela->nombre_carpeta_principal;
         $path = public_path('archivos/' . $folderName);
 
         File::makeDirectory($path, 0755, true, true);
@@ -74,7 +74,7 @@ class EscuelaController extends Controller
         $archivosPath = public_path('archivos');
 
         // Buscar la carpeta de la escuela
-        $escuelaCarpeta = (string)$escuela->numero_escuela;
+        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
         $rutaCarpeta = $archivosPath . '/' . $escuelaCarpeta;
 
         if (!File::isDirectory($rutaCarpeta)) {

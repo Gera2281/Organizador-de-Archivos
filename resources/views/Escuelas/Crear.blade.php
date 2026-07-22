@@ -18,8 +18,8 @@
         <div class="col-md-6">
             <form action="{{ route('escuelas.agg') }}" method="POST" class="card p-4">
                 @csrf
-                <div class="mb-3"><label for="numero_escuela" class="form-label">Nombre de Carpeta</label><input type="text" class="form-control" id="numero_escuela" name="numero_escuela" maxlength="15" required></div>
-                <div class="mb-3"><label for="ctt" class="form-label">Descripcion</label><input type="text" class="form-control" id="ctt" name="ctt" maxlength="15" required></div>
+                <div class="mb-3"><label for="nombre_carpeta_principal" class="form-label">Nombre de Carpeta</label><input type="text" class="form-control" id="nombre_carpeta_principal" name="nombre_carpeta_principal" maxlength="30" required></div>
+                <div class="mb-3"><label for="descripcion" class="form-label">Descripcion</label><input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="30" required></div>
                 <button type="submit" class="btn btn-primary w-100">Crear Carpeta</button>
             </form>
         </div>

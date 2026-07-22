@@ -25,12 +25,12 @@
                     <h6 class="dropdown-header fw-bold text-dark">Filtrar por: </h6>
                 </li>
                 <li>
-                    <a class="dropdown-item dropdown-item-custom" href="#" data-filter="ctt" id="filter-ctt-item">
+                    <a class="dropdown-item dropdown-item-custom" href="#" data-filter="descripcion" id="filter-descripcion-item">
                         <i class="bi bi-card-text me-2 text-primary"></i> Descripcion
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item dropdown-item-custom" href="#" data-filter="numero_escuela" id="filter-numero-item">
+                    <a class="dropdown-item dropdown-item-custom" href="#" data-filter="nombre_carpeta_principal" id="filter-nombre-item">
                         <i class="bi bi-hash me-2 text-success"></i> Nombre de la Carpeta
                     </a>
                 </li>
@@ -56,16 +56,16 @@
         @forelse ($escuelas as $escuela)
         <div class="col school-card-wrapper" 
              data-escuela-id="{{ $escuela->id }}" 
-             data-escuela-numero="{{ $escuela->numero_escuela }}">
+             data-escuela-numero="{{ $escuela->nombre_carpeta_principal }}">
             <a href="{{ route('escuelas.show', $escuela->id) }}" class="text-decoration-none text-dark">
                 <div class="card folder-card h-100 position-relative shadow-sm border-0 text-center bg-white">
                     <div class="card-body py-4 d-flex flex-column align-items-center justify-content-center">
                         <div class="position-relative d-inline-block">
                             <i class="bi bi-folder-fill" style="font-size: 4.5rem; color: rgba(7, 0, 147, 0.59);"></i>
                         </div>
-                        <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">ESCUELA
-                            <strong>{{ $escuela->numero_escuela }}</strong></span>
-                        <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">CTT: {{ $escuela->ctt }}</span>
+                        <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                            <strong>{{ $escuela->nombre_carpeta_principal }}</strong></span>
+                        <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">{{ $escuela->descripcion }}</span>
                     </div>
                 </div>
             </a>

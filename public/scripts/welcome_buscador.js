@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterBtnText = document.getElementById('filter-btn-text');
     const schoolsContainer = document.getElementById('schools-container');
 
-    const filterCttItem = document.getElementById('filter-ctt-item');
-    const filterNumeroItem = document.getElementById('filter-numero-item');
+    const filterDescripcionItem = document.getElementById('filter-descripcion-item');
+    const filterNombreItem = document.getElementById('filter-nombre-item');
     const filterClearItem = document.getElementById('filter-clear-item');
 
     let activeFilter = 'all';
@@ -15,19 +15,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function setFilter(filterType) {
         activeFilter = filterType;
 
-        filterCttItem.classList.remove('active');
-        filterNumeroItem.classList.remove('active');
+        filterDescripcionItem.classList.remove('active');
+        filterNombreItem.classList.remove('active');
 
-        if (filterType === 'ctt') {
-            filterCttItem.classList.add('active');
-            filterBtnText.textContent = 'Filtro: CTT';
+        if (filterType === 'descripcion') {
+            filterDescripcionItem.classList.add('active');
+            filterBtnText.textContent = 'Filtro: Descripcion';
             filterDropdownBtn.classList.add('btn-filter-active');
-            searchInput.placeholder = 'Buscar por CTT (ej. Ct2514c51)...';
-        } else if (filterType === 'numero_escuela') {
-            filterNumeroItem.classList.add('active');
-            filterBtnText.textContent = 'Filtro: N° Escuela';
+            searchInput.placeholder = 'Buscar por descripcion...';
+        } else if (filterType === 'nombre_carpeta_principal') {
+            filterNombreItem.classList.add('active');
+            filterBtnText.textContent = 'Filtro: Nombre de Carpeta';
             filterDropdownBtn.classList.add('btn-filter-active');
-            searchInput.placeholder = 'Buscar por Número de Escuela (ej. 14984984)...';
+            searchInput.placeholder = 'Buscar por nombre de carpeta...';
         } else {
             filterBtnText.textContent = 'Filtrar';
             filterDropdownBtn.classList.remove('btn-filter-active');
@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
         performSearch();
     }
 
-    filterCttItem.addEventListener('click', function(e) {
+    filterDescripcionItem.addEventListener('click', function(e) {
         e.preventDefault();
-        setFilter('ctt');
+        setFilter('descripcion');
     });
 
-    filterNumeroItem.addEventListener('click', function(e) {
+    filterNombreItem.addEventListener('click', function(e) {
         e.preventDefault();
-        setFilter('numero_escuela');
+        setFilter('nombre_carpeta_principal');
     });
 
     filterClearItem.addEventListener('click', function(e) {
@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <i class="bi bi-folder-fill" style="font-size: 4.5rem; color: rgba(7, 0, 147, 0.59);"></i>
                                 </div>
                                 <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">ESCUELA
-                                    <strong>${escuela.numero_escuela}</strong></span>
-                                <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">CTT: ${escuela.ctt}</span>
+                                    <strong>${escuela.nombre_carpeta_principal}</strong></span>
+                                <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">${escuela.descripcion}</span>
                             </div>
                         </div>
                     </div>

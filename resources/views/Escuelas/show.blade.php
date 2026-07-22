@@ -65,8 +65,8 @@
                 <i class="bi bi-arrow-left"></i>
             </a>
             <div>
-                <h1 class="h3 mb-0">Escuela {{ $escuela->numero_escuela }}</h1>
-                <p class="text-muted mb-0">CTT: {{ $escuela->ctt }}</p>
+                <h1 class="h3 mb-0"> {{ $escuela->nombre_carpeta_principal }}</h1>
+                <p class="text-muted mb-0"> {{ $escuela->descripcion }}</p>
             </div>
             <!-- boton para crear archivos -->
         <div class="d-flex align-items-center gap-2">

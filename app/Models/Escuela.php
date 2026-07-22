@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['numero_escuela', 'ctt'])]
+#[Fillable(['nombre_carpeta_principal', 'descripcion'])]
 class Escuela extends Model
 {
     use HasFactory;
 
-    protected $table = 'escuelas';
+    protected $table = 'carpetas';
 }
