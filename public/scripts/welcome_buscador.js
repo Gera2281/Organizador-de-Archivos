@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <div class="position-relative d-inline-block">
                                     <i class="bi bi-folder-fill" style="font-size: 4.5rem; color: rgba(7, 0, 147, 0.59);"></i>
                                 </div>
-                                <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">ESCUELA
+                                <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">
                                     <strong>${escuela.nombre_carpeta_principal}</strong></span>
                                 <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">${escuela.descripcion}</span>
                             </div>
