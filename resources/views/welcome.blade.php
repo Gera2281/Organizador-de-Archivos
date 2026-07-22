@@ -1,12 +1,11 @@
 @extends('partials.head')
-@section('title', 'SIIE')
 
 @section('contentido')
 <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center">SIIE - Evaluación</h1>
+            <h1 class="text-center">ORGANIZADOR - JGCLL</h1>
         </div>
     </div>
 </div>
