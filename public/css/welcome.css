@@ -1,0 +1,97 @@
+.folder-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-radius: 16px !important;
+    cursor: pointer;
+}
+.folder-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(7, 0, 147, 0.12) !important;
+    border-color: rgba(7, 0, 147, 0.25) !important;
+}
+.folder-card:hover .bi-folder-fill {
+    color: rgba(7, 0, 147, 0.85) !important;
+    transform: scale(1.08);
+}
+.bi-folder-fill {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+.search-input-group {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    padding: 4px 4px 4px 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+.search-input-group:focus-within {
+    border-color: rgba(7, 0, 147, 0.4);
+    box-shadow: 0 4px 20px rgba(7, 0, 147, 0.08);
+}
+.search-input-group .form-control {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+.search-input-group .btn-filter {
+    border-radius: 25px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
+    padding: 8px 20px;
+}
+.search-input-group .btn-filter:hover {
+    background-color: rgba(7, 0, 147, 0.08);
+    color: rgb(7, 0, 147);
+}
+.dropdown-menu-custom {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+}
+.dropdown-item-custom {
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+}
+.dropdown-item-custom:hover {
+    background-color: rgba(7, 0, 147, 0.05);
+    color: rgb(7, 0, 147);
+}
+.school-card-wrapper {
+    animation: fadeInCard 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(12px);
+}
+@keyframes fadeInCard {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.btn-filter-active {
+    background-color: rgba(7, 0, 147, 0.12) !important;
+    color: rgb(7, 0, 147) !important;
+    border: 1px solid rgba(7, 0, 147, 0.2) !important;
+}
+.dropdown-item-custom.active {
+    background-color: rgba(7, 0, 147, 0.1) !important;
+    color: rgb(7, 0, 147) !important;
+    font-weight: 600;
+}
+.skeleton-card {
+    opacity: 0.7;
+}
+.skeleton-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: inline-block;
+}
