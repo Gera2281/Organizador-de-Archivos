@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Escuela;
+use App\Models\Carpeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -11,9 +11,9 @@ class CarpetaController extends Controller
 {
     public function index()
     {
-        // Obtener todas las escuelas iniciales
-        $escuelas = Escuela::all();
-        return view('welcome', compact('escuelas'));
+        // Obtener todas las carpetas iniciales
+        $carpetas = Carpeta::all();
+        return view('welcome', compact('carpetas'));
     } 
 
     public function search(Request $request)
@@ -21,7 +21,7 @@ class CarpetaController extends Controller
         $query = $request->input('query');
         $filter = $request->input('filter');
 
-        $dbQuery = Escuela::query();
+        $dbQuery = Carpeta::query();
 
         if ($query) {
             if ($filter === 'descripcion') {
@@ -36,31 +36,31 @@ class CarpetaController extends Controller
             }
         }
 
-        $escuelas = $dbQuery->get();
+        $carpetas = $dbQuery->get();
 
-        return response()->json($escuelas);
+        return response()->json($carpetas);
     }
 
-    public function CrearCarpetasEscuelas()
+    public function CrearCarpetas()
     {
         return view('Carpetas.Crear');
     }
 
-    public function ValidarCarpetasEscuelas(Request $request)
+    public function ValidarCarpetas(Request $request)
     {
         $request->validate([     //Validar que los campos no esten vacios y max caracteres
             'nombre_carpeta_principal' => 'required|max:30|unique:carpetas,nombre_carpeta_principal',
             'descripcion' => 'required|max:30',
         ]);
 
-        $escuela = new Escuela();
-        $escuela->nombre_carpeta_principal = $request->nombre_carpeta_principal;
-        $escuela->descripcion = $request->descripcion;
-        //$escuela->user_id = Auth::id();  //Guardar el usuario que creo la carpeta
-        $escuela->save();
+        $carpeta = new Carpeta();
+        $carpeta->nombre_carpeta_principal = $request->nombre_carpeta_principal;
+        $carpeta->descripcion = $request->descripcion;
+        //$carpeta->user_id = Auth::id();  //Guardar el usuario que creo la carpeta
+        $carpeta->save();
 
         // Crear la carpeta en public/archivos
-        $folderName = $escuela->nombre_carpeta_principal;
+        $folderName = $carpeta->nombre_carpeta_principal;
         $path = public_path('archivos/' . $folderName);
 
         File::makeDirectory($path, 0755, true, true);
@@ -68,21 +68,21 @@ class CarpetaController extends Controller
         return redirect('/');
     }
 
-    public function show(Escuela $escuela)
+    public function show(Carpeta $carpeta)
     {
-        // Obtener la carpeta de la escuela en public/archivos
+        // Obtener la carpeta principal en public/archivos
         $archivosPath = public_path('archivos');
 
-        // Buscar la carpeta de la escuela
-        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
-        $rutaCarpeta = $archivosPath . '/' . $escuelaCarpeta;
+        // Buscar la carpeta principal
+        $nombreCarpeta = (string)$carpeta->nombre_carpeta_principal;
+        $rutaCarpeta = $archivosPath . '/' . $nombreCarpeta;
 
         if (!File::isDirectory($rutaCarpeta)) {
-            return redirect('/')->with('error', 'Carpeta de escuela no encontrada');
+            return redirect('/')->with('error', 'Carpeta principal no encontrada');
         }
 
         // Obtener el contenido de la carpeta
-        $rutaCarpeta = $archivosPath . '/' . $escuelaCarpeta;
+        $rutaCarpeta = $archivosPath . '/' . $nombreCarpeta;
         $contenido = [];
 
         if (File::isDirectory($rutaCarpeta)) {
@@ -93,7 +93,7 @@ class CarpetaController extends Controller
             foreach ($items as $item) {
                 $contenido[] = [
                     'nombre' => basename($item),
-                    'ruta' => 'archivos/' . $escuelaCarpeta . '/' . basename($item),
+                    'ruta' => 'archivos/' . $nombreCarpeta . '/' . basename($item),
                     'tipo' => 'file'
                 ];
             }
@@ -101,12 +101,12 @@ class CarpetaController extends Controller
             foreach ($subdirectorios as $subdirectorio) {
                 $contenido[] = [
                     'nombre' => basename($subdirectorio),
-                    'ruta' => 'archivos/' . $escuelaCarpeta . '/' . basename($subdirectorio),
+                    'ruta' => 'archivos/' . $nombreCarpeta . '/' . basename($subdirectorio),
                     'tipo' => 'dir'
                 ];
             }
         }
 
-        return view('Carpetas.show', compact('escuela', 'contenido', 'escuelaCarpeta'));
+        return view('Carpetas.show', compact('carpeta', 'contenido', 'nombreCarpeta'));
     }
 }

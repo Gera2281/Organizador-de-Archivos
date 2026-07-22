@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Archivo;
+use App\Models\Carpeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -10,12 +11,12 @@ use Illuminate\Support\Facades\File;
 class ArchivosController extends Controller
 {
 
-    public function CrearCarpetasA(\App\Models\Escuela $escuela)
+    public function CrearCarpetasA(Carpeta $carpeta)
     {
-        return view('Archivos.CrearCarpeta', compact('escuela'));
+        return view('Archivos.CrearCarpeta', compact('carpeta'));
     }
 
-    public function ValidarCarpetasA(Request $request, \App\Models\Escuela $escuela)
+    public function ValidarCarpetasA(Request $request, Carpeta $carpeta)
     {
         $request->validate([     //Validar que los campos no esten vacios y max caracteres
             'nombre_carpeta' => 'required|max:50|unique:archivos,nombre_carpeta',
@@ -28,29 +29,29 @@ class ArchivosController extends Controller
         //$archivo->user_id = Auth::id();  //Guardar el usuario que creo la carpeta
         $archivo->save();
 
-        // Obtener la carpeta de la escuela en public/archivos
+        // Obtener la carpeta principal en public/archivos
         $archivosPath = public_path('archivos');
-        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
-        $rutaCarpeta = $archivosPath . '/' . $escuelaCarpeta;
+        $nombreCarpeta = (string)$carpeta->nombre_carpeta_principal;
+        $rutaCarpeta = $archivosPath . '/' . $nombreCarpeta;
 
         if (File::isDirectory($rutaCarpeta)) {
             // Crear la carpeta dentro de la carpeta de la escuela
             $folderName = $archivo->nombre_carpeta;
-            $path = public_path('archivos/' . $escuelaCarpeta . '/' . $folderName);
+            $path = public_path('archivos/' . $nombreCarpeta . '/' . $folderName);
             File::makeDirectory($path, 0755, true, true);
         }
 
-        return redirect()->route('escuelas.show', $escuela->id);
+        return redirect()->route('carpetas.show', $carpeta->id);
     }
 
-    public function show(\App\Models\Escuela $escuela, $carpeta)
+    public function show(Carpeta $carpeta, $subcarpeta)
     {
         $archivosPath = public_path('archivos');
-        $numeroCarpeta = (string)$escuela->nombre_carpeta_principal;
-        $rutaCarpeta = $archivosPath . '/' . $numeroCarpeta . '/' . $carpeta;
+        $nombreCarpeta = (string)$carpeta->nombre_carpeta_principal;
+        $rutaCarpeta = $archivosPath . '/' . $nombreCarpeta . '/' . $subcarpeta;
 
         if (!File::isDirectory($rutaCarpeta)) {
-            return redirect()->route('escuelas.show', $escuela->id)->with('error', 'Carpeta no encontrada');
+            return redirect()->route('carpetas.show', $carpeta->id)->with('error', 'Carpeta no encontrada');
         }
 
         $contenido = [];
@@ -60,7 +61,7 @@ class ArchivosController extends Controller
         foreach ($items as $item) {
             $contenido[] = [
                 'nombre' => basename($item),
-                'ruta'   => 'archivos/' . $numeroCarpeta . '/' . $carpeta . '/' . basename($item),
+                'ruta'   => 'archivos/' . $nombreCarpeta . '/' . $subcarpeta . '/' . basename($item),
                 'tipo'   => 'file'
             ];
         }
@@ -68,51 +69,51 @@ class ArchivosController extends Controller
         foreach ($subdirectorios as $subdirectorio) {
             $contenido[] = [
                 'nombre' => basename($subdirectorio),
-                'ruta'   => 'archivos/' . $numeroCarpeta . '/' . $carpeta . '/' . basename($subdirectorio),
+                'ruta'   => 'archivos/' . $nombreCarpeta . '/' . $subcarpeta . '/' . basename($subdirectorio),
                 'tipo'   => 'dir'
             ];
         }
 
         // Buscamos el registro de la carpeta en la base de datos
-        $archivoDb = \App\Models\Archivo::where('nombre_carpeta', $carpeta)->first();
+        $archivoDb = Archivo::where('nombre_carpeta', $subcarpeta)->first();
         $contenidoReal = $archivoDb ? $archivoDb->contenido : 'Sin descripción';
 
         // Creamos un objeto simple para la vista (nombre de la carpeta y escuela)
         $archivo = (object)[
             'id'             => $archivoDb ? $archivoDb->id : null,
-            'nombre_carpeta' => $carpeta,
+            'nombre_carpeta' => $subcarpeta,
             'contenido'      => $contenidoReal,
-            'escuela_id'     => $escuela->id,
-            'escuela'        => $escuela,
+            'carpeta_id'     => $carpeta->id,
+            'carpeta'        => $carpeta,
         ];
 
-        return view('Archivos.VerCarpeta', compact('archivo', 'contenido', 'escuela', 'carpeta'));
+        return view('Archivos.VerCarpeta', compact('archivo', 'contenido', 'carpeta', 'subcarpeta'));
     }
     
     
-    public function AggArchivos(\App\Models\Escuela $escuela)
+    public function AggArchivos(Carpeta $carpeta)
     {
-        return view('Archivos.Creararchivo', compact('escuela'));
+        return view('Archivos.Creararchivo', compact('carpeta'));
     }
 
-    public function ValidarArchivos(Request $request, \App\Models\Escuela $escuela)
+    public function ValidarArchivos(Request $request, Carpeta $carpeta)
     {
         $request->validate([ //Valida que los campos requeridos
             'documento'      => 'required|mimes:jpeg,png,webp,jpg,pdf|max:2048',
         ]);
 
         $archivo = new Archivo();
-        $escuelaCarpeta = (string)$escuela->nombre_carpeta_principal;
+        $nombreCarpeta = (string)$carpeta->nombre_carpeta_principal;
 
         if ($request->hasFile('documento')) { //Si subieron un archivo
             $file = $request->file('documento');
             $filename = time() . '_' . $file->getClientOriginalName();
             
             // Guarda físicamente el archivo en la carpeta de la escuela
-            $file->move(public_path('archivos/' . $escuelaCarpeta), $filename);
+            $file->move(public_path('archivos/' . $nombreCarpeta), $filename);
             
             // Guarda la ruta en la base de datos
-            $archivo->imagen = 'archivos/' . $escuelaCarpeta . '/' . $filename;
+            $archivo->imagen = 'archivos/' . $nombreCarpeta . '/' . $filename;
             
             // Llenamos los campos obligatorios de la tabla archivos para evitar un error
             $archivo->nombre_carpeta = $filename;
@@ -121,6 +122,6 @@ class ArchivosController extends Controller
         
         $archivo->save();
 
-        return redirect()->route('escuelas.show', $escuela->id);
+        return redirect()->route('carpetas.show', $carpeta->id);
     }
 }

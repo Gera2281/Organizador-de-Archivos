@@ -65,19 +65,19 @@
                 <i class="bi bi-arrow-left"></i>
             </a>
             <div>
-                <h1 class="h3 mb-0"> {{ $escuela->nombre_carpeta_principal }}</h1>
-                <p class="text-muted mb-0"> {{ $escuela->descripcion }}</p>
+                <h1 class="h3 mb-0"> {{ $carpeta->nombre_carpeta_principal }}</h1>
+                <p class="text-muted mb-0"> {{ $carpeta->descripcion }}</p>
             </div>
             <!-- boton para crear archivos -->
         <div class="d-flex align-items-center gap-2">
-            <a href="{{ route('archivos.crearArch', $escuela->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nuevo archivo">
+            <a href="{{ route('archivos.crear', $carpeta->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nuevo archivo">
                 <span id="aggregate-btn-text"></span>
                 <i class="bi bi-file-earmark-plus fs-3 text-primary"></i>
             </a>
         </div>
         <!--boton crear carpeta-->
         <div class="d-flex align-items-center gap-0">
-            <a href="{{ route('archivos.creaRR', $escuela->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva carpeta">
+            <a href="{{ route('archivos.crear-carpeta', $carpeta->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva carpeta">
                 <span id="aggregate-btn-text"></span>
                 <i class="bi bi-folder-plus fs-3 text-primary"></i>
             </a>
@@ -109,7 +109,7 @@
                     <div class="card h-100 text-center @if($item['tipo'] == 'dir') folder-card @else file-card @endif" style="animation-delay: {{ $index * 50 }}ms;">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                             @if($item['tipo'] == 'dir')
-                                <a href="{{ route('archivos.carpeta', ['escuela' => $escuela->id, 'carpeta' => $item['nombre']]) }}"
+                                <a href="{{ route('archivos.carpeta', ['carpeta' => $carpeta->id, 'subcarpeta' => $item['nombre']]) }}"
                                    class="text-decoration-none text-reset d-flex flex-column align-items-center">
                                     <i class="bi bi-folder-fill file-icon folder-icon mb-2"></i>
                                     <div class="card-title mt-2" title="{{ $item['nombre'] }}">{{ Str::limit($item['nombre'], 20) }}</div>

@@ -67,7 +67,7 @@
 <div class="container mt-4">
     <div class="p-3 mb-4 bg-light border rounded-3">
         <div class="d-flex align-items-center">
-            <a href="{{ isset($escuela) ? route('escuelas.show', $escuela->id) : '/' }}" class="btn btn-outline-secondary me-3" title="Atrás">
+            <a href="{{ isset($carpeta) ? route('carpetas.show', $carpeta->id) : '/' }}" class="btn btn-outline-secondary me-3" title="Atrás">
                 <i class="bi bi-arrow-left"></i>
             </a>
             <div>
@@ -76,7 +76,7 @@
             </div>
             <!-- boton para crear archivos -->
             <div class="d-flex align-items-center gap-2">
-                <a href="{{ route('archivos.creaRR', $escuela->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nuevo archivo">
+                <a href="{{ route('archivos.crear', $carpeta->id) }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nuevo archivo">
                     <span id="aggregate-btn-text"></span>
                     <i class="bi bi-file-earmark-plus fs-3 text-primary"></i>
                 </a>

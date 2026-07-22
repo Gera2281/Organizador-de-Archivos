@@ -16,7 +16,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="{{ route('escuelas.agg') }}" method="POST" class="card p-4">
+            <form action="{{ route('carpetas.guardar') }}" method="POST" class="card p-4">
                 @csrf
                 <div class="mb-3"><label for="nombre_carpeta_principal" class="form-label">Nombre de Carpeta</label><input type="text" class="form-control" id="nombre_carpeta_principal" name="nombre_carpeta_principal" maxlength="30" required></div>
                 <div class="mb-3"><label for="descripcion" class="form-label">Descripcion</label><input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="30" required></div>

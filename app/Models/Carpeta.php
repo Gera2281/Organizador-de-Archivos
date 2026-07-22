@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(['nombre_carpeta_principal', 'descripcion'])]
-class Escuela extends Model
+class Carpeta extends Model
 {
     use HasFactory;
 

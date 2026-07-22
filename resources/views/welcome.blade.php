@@ -46,26 +46,26 @@
         </div>
         <!--boton para crear carpetas -->
         <div class="d-flex align-items-center gap-0">
-            <a href="{{ route('escuelas.creaRR') }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva carpeta">
+            <a href="{{ route('carpetas.crear') }}" class="btn btn-filter" type="button" style="border-radius: 15px;" title="Agregar nueva carpeta">
                 <span id="aggregate-btn-text"></span>
                 <i class="bi bi-folder-plus fs-3 text-primary"></i>
             </a>
         </div>
     </div>
     <div id="schools-container" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4 justify-content-center">
-        @forelse ($escuelas as $escuela)
+        @forelse ($carpetas as $carpeta)
         <div class="col school-card-wrapper" 
-             data-escuela-id="{{ $escuela->id }}" 
-             data-escuela-numero="{{ $escuela->nombre_carpeta_principal }}">
-            <a href="{{ route('escuelas.show', $escuela->id) }}" class="text-decoration-none text-dark">
+             data-carpeta-id="{{ $carpeta->id }}" 
+             data-carpeta-nombre="{{ $carpeta->nombre_carpeta_principal }}">
+            <a href="{{ route('carpetas.show', $carpeta->id) }}" class="text-decoration-none text-dark">
                 <div class="card folder-card h-100 position-relative shadow-sm border-0 text-center bg-white">
                     <div class="card-body py-4 d-flex flex-column align-items-center justify-content-center">
                         <div class="position-relative d-inline-block">
                             <i class="bi bi-folder-fill" style="font-size: 4.5rem; color: rgba(7, 0, 147, 0.59);"></i>
                         </div>
                         <span class="text-muted fw-bold mt-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">
-                            <strong>{{ $escuela->nombre_carpeta_principal }}</strong></span>
-                        <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">{{ $escuela->descripcion }}</span>
+                            <strong>{{ $carpeta->nombre_carpeta_principal }}</strong></span>
+                        <span class="text-muted mt-1 d-block" style="font-size: 0.7rem; opacity: 0.85;">{{ $carpeta->descripcion }}</span>
                     </div>
                 </div>
             </a>

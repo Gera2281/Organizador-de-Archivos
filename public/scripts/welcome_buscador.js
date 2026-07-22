@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             filter: activeFilter
         });
 
-        fetch(`/escuelas/search?${params.toString()}`, {
+        fetch(`/carpetas/search?${params.toString()}`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }

@@ -5,7 +5,7 @@
 <div class="container mt-4">
     <div class="p-3 mb-4 bg-light border rounded-3">
         <div class="d-flex align-items-center">
-            <a href="{{ route('escuelas.show', $escuela->id) }}" class="btn btn-outline-secondary me-3" title="Atrás">
+            <a href="{{ route('carpetas.show', $carpeta->id) }}" class="btn btn-outline-secondary me-3" title="Atrás">
                 <i class="bi bi-arrow-left"></i>
             </a>
             <div>
@@ -16,7 +16,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="{{ route('archivos.agg', $escuela->id) }}" method="POST" class="card p-4">
+            <form action="{{ route('archivos.guardar-carpeta', $carpeta->id) }}" method="POST" class="card p-4">
                 @csrf
                 <div class="mb-3">
                     <label for="nombre_carpeta" class="form-label">Nombre de la Carpeta</label>
