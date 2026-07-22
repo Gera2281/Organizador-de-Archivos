@@ -1,2 +1,1 @@
-# SIEE_App
-Programa dedicado al Siee de AprendeTam
+Programa enfocado a organizar archivos con carpetas y subcarpetas
