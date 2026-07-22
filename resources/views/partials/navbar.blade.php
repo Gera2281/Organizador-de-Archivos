@@ -1,7 +1,7 @@
 <div class="bg-white py-2">
     <div class="container d-flex justify-content-between align-items-center">
-        <img src="{{ asset('logos/Chivas.svg') }}" alt="Secretaría de Educación Pública" draggable="false" style="width: 5%;">
-        <img src="{{ asset('logos/Chivas.svg') }}" alt="Secretaría de Educación Pública" draggable="false" style="width: 5%;">
+        <img src="{{ asset('logos/Chivas.svg') }}" alt="Secretaría de Educación Pública" draggable="false" style="width: 4%;">
+        <img src="{{ asset('logos/Chivas.svg') }}" alt="Secretaría de Educación Pública" draggable="false" style="width: 4%;">
     </div>
 </div>
 <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">

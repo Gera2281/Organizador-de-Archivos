@@ -15,7 +15,7 @@
             <span class="input-group-text bg-transparent border-0 d-flex align-items-center">
                 <i class="bi bi-search text-muted"></i>
             </span>
-            <input type="text" id="search-input" class="form-control" placeholder="Buscar escuela...">
+            <input type="text" id="search-input" class="form-control" placeholder="Buscar carpetas...">
             <button class="btn btn-filter dropdown-toggle d-flex align-items-center gap-2" type="button"
                 data-bs-toggle="dropdown" aria-expanded="false" id="filter-dropdown-btn">
                 <i class="bi bi-sliders"></i> <span id="filter-btn-text">Filtrar</span>
@@ -73,7 +73,7 @@
         @empty
         <div class="col-12 text-center py-5 w-100" id="no-results-box">
             <i class="bi bi-folder-x text-muted" style="font-size: 4rem;"></i>
-            <p class="text-muted mt-3 fw-medium">No se encontraron escuelas con la información proporcionada.</p>
+            <p class="text-muted mt-3 fw-medium">No se encontraron carpetas con la información proporcionada.</p>
         </div>
         @endforelse
     </div>
