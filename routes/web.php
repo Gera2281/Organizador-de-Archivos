@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EscuelaController;
+use App\Http\Controllers\CarpetaController;
 use App\Http\Controllers\ArchivosController;
 
 //inicio de la aplicacion y visualizacion de escuelas
-Route::get('/', [EscuelaController::class, 'index']);
+Route::get('/', [CarpetaController::class, 'index']);
 //Rutas para buscar escuelas
-Route::get('/escuelas/search', [EscuelaController::class, 'search'])->name('escuelas.search');
+Route::get('/escuelas/search', [CarpetaController::class, 'search'])->name('escuelas.search');
 
 //Rutas para agregar y validar carpetas de escuelas
-Route::get('/crear/carpetas', [EscuelaController::class, 'CrearCarpetasEscuelas'])->name('escuelas.creaRR');
-Route::post('/agregar/carpetas', [EscuelaController::class, 'ValidarCarpetasEscuelas'])->name('escuelas.agg');
+Route::get('/crear/carpetas', [CarpetaController::class, 'CrearCarpetasEscuelas'])->name('escuelas.creaRR');
+Route::post('/agregar/carpetas', [CarpetaController::class, 'ValidarCarpetasEscuelas'])->name('escuelas.agg');
 //Ruta para mostrar la vista lo que hay dentro de la carpeta escuela (Carpetas, Archivos)
-Route::get('/escuelas/{escuela}', [EscuelaController::class, 'show'])->name('escuelas.show');
+Route::get('/escuelas/{escuela}', [CarpetaController::class, 'show'])->name('escuelas.show');
 
 //Rutas para agregar y validar carpetas dentro de las carpetas de escuelas
 Route::get('/crear/carpetasarchivos/{escuela}', [ArchivosController::class, 'CrearCarpetasA'])->name('archivos.creaRR');
